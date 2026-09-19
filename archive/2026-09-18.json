@@ -1,0 +1,569 @@
+{
+  "schemaVersion": 1,
+  "strategyBaseline": "N_Structure_v0_14_2_FIX1",
+  "algorithmNotes": {
+    "minRawBarsPerN": 3,
+    "bos": "既有N → N內部破壞 → 不多不空 → 同方向重建 → 突破原N延伸端/弱端 → BOS → 更大同向N",
+    "fvg": "bull: low > high[2]; bear: high < low[2]",
+    "zoneFreshness": "FVG完整回補後保留結構背景，但退出新鮮交易候選",
+    "notImplemented": [
+      "左側流動性演算法",
+      "次級升主要規則",
+      "老師藍框的未確認邊界規則"
+    ]
+  },
+  "source": {
+    "exchange": "Bitunix",
+    "market": "Futures",
+    "gateway": "https://bitunix-data.j225145.workers.dev",
+    "symbols": [
+      "BTCUSDT",
+      "ETHUSDT"
+    ],
+    "intervals": [
+      "1m",
+      "5m",
+      "15m"
+    ],
+    "timezone": "Asia/Taipei"
+  },
+  "generatedAt": "2026-09-19T15:12:08.540Z",
+  "targetDate": "2026-09-18",
+  "warmupDays": 2,
+  "dataQuality": {
+    "BTCUSDT": {
+      "1m": [
+        {
+          "date": "2026-09-16",
+          "expectedBars": 1440,
+          "receivedBars": 1440,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-17",
+          "expectedBars": 1440,
+          "receivedBars": 1440,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-18",
+          "expectedBars": 1440,
+          "receivedBars": 1440,
+          "missingBars": 0,
+          "complete": true
+        }
+      ],
+      "5m": [
+        {
+          "date": "2026-09-16",
+          "expectedBars": 288,
+          "receivedBars": 288,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-17",
+          "expectedBars": 288,
+          "receivedBars": 288,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-18",
+          "expectedBars": 288,
+          "receivedBars": 288,
+          "missingBars": 0,
+          "complete": true
+        }
+      ],
+      "15m": [
+        {
+          "date": "2026-09-16",
+          "expectedBars": 96,
+          "receivedBars": 96,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-17",
+          "expectedBars": 96,
+          "receivedBars": 96,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-18",
+          "expectedBars": 96,
+          "receivedBars": 96,
+          "missingBars": 0,
+          "complete": true
+        }
+      ]
+    },
+    "ETHUSDT": {
+      "1m": [
+        {
+          "date": "2026-09-16",
+          "expectedBars": 1440,
+          "receivedBars": 1440,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-17",
+          "expectedBars": 1440,
+          "receivedBars": 1440,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-18",
+          "expectedBars": 1440,
+          "receivedBars": 1440,
+          "missingBars": 0,
+          "complete": true
+        }
+      ],
+      "5m": [
+        {
+          "date": "2026-09-16",
+          "expectedBars": 288,
+          "receivedBars": 288,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-17",
+          "expectedBars": 288,
+          "receivedBars": 288,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-18",
+          "expectedBars": 288,
+          "receivedBars": 288,
+          "missingBars": 0,
+          "complete": true
+        }
+      ],
+      "15m": [
+        {
+          "date": "2026-09-16",
+          "expectedBars": 96,
+          "receivedBars": 96,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-17",
+          "expectedBars": 96,
+          "receivedBars": 96,
+          "missingBars": 0,
+          "complete": true
+        },
+        {
+          "date": "2026-09-18",
+          "expectedBars": 96,
+          "receivedBars": 96,
+          "missingBars": 0,
+          "complete": true
+        }
+      ]
+    }
+  },
+  "results": {
+    "BTCUSDT": {
+      "1m": {
+        "symbol": "BTCUSDT",
+        "interval": "1m",
+        "targetDate": "2026-09-18",
+        "barCountAnalyzed": 4320,
+        "targetBars": 1440,
+        "lastTargetClose": 80688.8,
+        "endState": {
+          "code": 0,
+          "text": "尚未確認方向N／強結構已失效"
+        },
+        "metrics": {
+          "n": {
+            "total": 119,
+            "bullish": 74,
+            "bearish": 45
+          },
+          "neutralEntries": {
+            "total": 27,
+            "fromBull": 17,
+            "fromBear": 10
+          },
+          "strongBreaks": {
+            "total": 61,
+            "fromBull": 33,
+            "fromBear": 28
+          },
+          "bos": {
+            "total": 11,
+            "bullish": 7,
+            "bearish": 4,
+            "withZone": 9,
+            "withoutZone": 2
+          },
+          "fvg": {
+            "total": 521,
+            "bullish": 269,
+            "bearish": 252
+          },
+          "zones": {
+            "created": 9,
+            "bullish": 6,
+            "bearish": 3,
+            "filledDuringTargetDay": 9,
+            "failedDuringTargetDay": 7,
+            "rejectedImmediately": 0,
+            "freshAtEnd": 0
+          }
+        },
+        "freshZones": []
+      },
+      "5m": {
+        "symbol": "BTCUSDT",
+        "interval": "5m",
+        "targetDate": "2026-09-18",
+        "barCountAnalyzed": 864,
+        "targetBars": 288,
+        "lastTargetClose": 80688.8,
+        "endState": {
+          "code": 2,
+          "text": "不多不空｜原多N破壞・等同向重建"
+        },
+        "metrics": {
+          "n": {
+            "total": 29,
+            "bullish": 20,
+            "bearish": 9
+          },
+          "neutralEntries": {
+            "total": 5,
+            "fromBull": 4,
+            "fromBear": 1
+          },
+          "strongBreaks": {
+            "total": 11,
+            "fromBull": 6,
+            "fromBear": 5
+          },
+          "bos": {
+            "total": 3,
+            "bullish": 3,
+            "bearish": 0,
+            "withZone": 3,
+            "withoutZone": 0
+          },
+          "fvg": {
+            "total": 71,
+            "bullish": 46,
+            "bearish": 25
+          },
+          "zones": {
+            "created": 3,
+            "bullish": 3,
+            "bearish": 0,
+            "filledDuringTargetDay": 1,
+            "failedDuringTargetDay": 1,
+            "rejectedImmediately": 0,
+            "freshAtEnd": 2
+          }
+        },
+        "freshZones": [
+          {
+            "id": 6,
+            "dir": "long",
+            "top": 77808.6,
+            "bot": 77627.6,
+            "fvgTop": 77828.2,
+            "fvgBottom": 77808.6,
+            "born": 1789719900000,
+            "bosTime": 1789719900000,
+            "touched": null,
+            "distanceFromTargetClose": 2880.199999999997
+          },
+          {
+            "id": 4,
+            "dir": "long",
+            "top": 76778.1,
+            "bot": 76603.6,
+            "fvgTop": 76794.5,
+            "fvgBottom": 76778.1,
+            "born": 1789698600000,
+            "bosTime": 1789698300000,
+            "touched": null,
+            "distanceFromTargetClose": 3910.699999999997
+          }
+        ]
+      },
+      "15m": {
+        "symbol": "BTCUSDT",
+        "interval": "15m",
+        "targetDate": "2026-09-18",
+        "barCountAnalyzed": 288,
+        "targetBars": 96,
+        "lastTargetClose": 80688.8,
+        "endState": {
+          "code": 0,
+          "text": "尚未確認方向N／強結構已失效"
+        },
+        "metrics": {
+          "n": {
+            "total": 8,
+            "bullish": 4,
+            "bearish": 4
+          },
+          "neutralEntries": {
+            "total": 2,
+            "fromBull": 1,
+            "fromBear": 1
+          },
+          "strongBreaks": {
+            "total": 3,
+            "fromBull": 1,
+            "fromBear": 2
+          },
+          "bos": {
+            "total": 1,
+            "bullish": 1,
+            "bearish": 0,
+            "withZone": 1,
+            "withoutZone": 0
+          },
+          "fvg": {
+            "total": 21,
+            "bullish": 14,
+            "bearish": 7
+          },
+          "zones": {
+            "created": 1,
+            "bullish": 1,
+            "bearish": 0,
+            "filledDuringTargetDay": 1,
+            "failedDuringTargetDay": 0,
+            "rejectedImmediately": 0,
+            "freshAtEnd": 0
+          }
+        },
+        "freshZones": []
+      }
+    },
+    "ETHUSDT": {
+      "1m": {
+        "symbol": "ETHUSDT",
+        "interval": "1m",
+        "targetDate": "2026-09-18",
+        "barCountAnalyzed": 4320,
+        "targetBars": 1440,
+        "lastTargetClose": 2583.24,
+        "endState": {
+          "code": -2,
+          "text": "不多不空｜原空N破壞・等同向重建"
+        },
+        "metrics": {
+          "n": {
+            "total": 150,
+            "bullish": 73,
+            "bearish": 77
+          },
+          "neutralEntries": {
+            "total": 35,
+            "fromBull": 14,
+            "fromBear": 21
+          },
+          "strongBreaks": {
+            "total": 65,
+            "fromBull": 30,
+            "fromBear": 35
+          },
+          "bos": {
+            "total": 16,
+            "bullish": 7,
+            "bearish": 9,
+            "withZone": 14,
+            "withoutZone": 2
+          },
+          "fvg": {
+            "total": 463,
+            "bullish": 233,
+            "bearish": 230
+          },
+          "zones": {
+            "created": 14,
+            "bullish": 6,
+            "bearish": 8,
+            "filledDuringTargetDay": 14,
+            "failedDuringTargetDay": 11,
+            "rejectedImmediately": 0,
+            "freshAtEnd": 0
+          }
+        },
+        "freshZones": []
+      },
+      "5m": {
+        "symbol": "ETHUSDT",
+        "interval": "5m",
+        "targetDate": "2026-09-18",
+        "barCountAnalyzed": 864,
+        "targetBars": 288,
+        "lastTargetClose": 2583.24,
+        "endState": {
+          "code": 2,
+          "text": "不多不空｜原多N破壞・等同向重建"
+        },
+        "metrics": {
+          "n": {
+            "total": 31,
+            "bullish": 19,
+            "bearish": 12
+          },
+          "neutralEntries": {
+            "total": 8,
+            "fromBull": 7,
+            "fromBear": 1
+          },
+          "strongBreaks": {
+            "total": 10,
+            "fromBull": 5,
+            "fromBear": 5
+          },
+          "bos": {
+            "total": 3,
+            "bullish": 3,
+            "bearish": 0,
+            "withZone": 1,
+            "withoutZone": 2
+          },
+          "fvg": {
+            "total": 56,
+            "bullish": 32,
+            "bearish": 24
+          },
+          "zones": {
+            "created": 1,
+            "bullish": 1,
+            "bearish": 0,
+            "filledDuringTargetDay": 0,
+            "failedDuringTargetDay": 0,
+            "rejectedImmediately": 0,
+            "freshAtEnd": 2
+          }
+        },
+        "freshZones": [
+          {
+            "id": 7,
+            "dir": "long",
+            "top": 2491.13,
+            "bot": 2484.35,
+            "fvgTop": 2495.91,
+            "fvgBottom": 2491.13,
+            "born": 1789720200000,
+            "bosTime": 1789719900000,
+            "touched": null,
+            "distanceFromTargetClose": 92.10999999999967
+          },
+          {
+            "id": 6,
+            "dir": "long",
+            "top": 2431.39,
+            "bot": 2426.69,
+            "fvgTop": 2437.86,
+            "fvgBottom": 2431.39,
+            "born": 1789647300000,
+            "bosTime": 1789647300000,
+            "touched": null,
+            "distanceFromTargetClose": 151.8499999999999
+          }
+        ]
+      },
+      "15m": {
+        "symbol": "ETHUSDT",
+        "interval": "15m",
+        "targetDate": "2026-09-18",
+        "barCountAnalyzed": 288,
+        "targetBars": 96,
+        "lastTargetClose": 2583.24,
+        "endState": {
+          "code": 1,
+          "text": "多N有效"
+        },
+        "metrics": {
+          "n": {
+            "total": 9,
+            "bullish": 9,
+            "bearish": 0
+          },
+          "neutralEntries": {
+            "total": 0,
+            "fromBull": 0,
+            "fromBear": 0
+          },
+          "strongBreaks": {
+            "total": 0,
+            "fromBull": 0,
+            "fromBear": 0
+          },
+          "bos": {
+            "total": 0,
+            "bullish": 0,
+            "bearish": 0,
+            "withZone": 0,
+            "withoutZone": 0
+          },
+          "fvg": {
+            "total": 20,
+            "bullish": 12,
+            "bearish": 8
+          },
+          "zones": {
+            "created": 0,
+            "bullish": 0,
+            "bearish": 0,
+            "filledDuringTargetDay": 0,
+            "failedDuringTargetDay": 0,
+            "rejectedImmediately": 0,
+            "freshAtEnd": 0
+          }
+        },
+        "freshZones": []
+      }
+    }
+  },
+  "comparisons": {
+    "BTCUSDT": {
+      "1m": {
+        "avg7d": null,
+        "avg30d": null
+      },
+      "5m": {
+        "avg7d": null,
+        "avg30d": null
+      },
+      "15m": {
+        "avg7d": null,
+        "avg30d": null
+      }
+    },
+    "ETHUSDT": {
+      "1m": {
+        "avg7d": null,
+        "avg30d": null
+      },
+      "5m": {
+        "avg7d": null,
+        "avg30d": null
+      },
+      "15m": {
+        "avg7d": null,
+        "avg30d": null
+      }
+    }
+  }
+}
