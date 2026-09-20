@@ -3,7 +3,7 @@ name: Daily Bitunix Strategy Research
 on:
   workflow_dispatch:
   schedule:
-    - cron: '50 21 * * *'
+    - cron: '40 21 * * *'
 
 permissions:
   contents: write
