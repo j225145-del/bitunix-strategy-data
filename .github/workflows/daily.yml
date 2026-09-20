@@ -29,7 +29,23 @@ jobs:
       - name: Run analysis
         env:
           GATEWAY_BASE: https://bitunix-data.j225145.workers.dev
-        run: node analyze.mjs
+        run: |
+          for attempt in 1 2 3; do
+            echo "Analysis attempt $attempt / 3"
+
+            if node analyze.mjs; then
+              echo "Analysis succeeded"
+              exit 0
+            fi
+
+            if [ "$attempt" -lt 3 ]; then
+              echo "Analysis failed. Waiting 60 seconds before retry..."
+              sleep 60
+            fi
+          done
+
+          echo "Analysis failed after 3 attempts"
+          exit 1
 
       - name: Commit daily result
         run: |
