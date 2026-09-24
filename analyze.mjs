@@ -225,7 +225,9 @@ class Core {
 
     if (wf !== 0 && (ownInside || inside || count === 0)) {
       this.watch(wf === 1 ? h : l, b * 2, t, b, tc);
-      this.watch(wf === 1 ? l : h, b * 2 + 1, t, b, tc);
+      // On a dual-break bar, do not infer an opposite-side intrabar sequence.
+      // The opposite side is deferred to later closed bars.
+      if (!both) this.watch(wf === 1 ? l : h, b * 2 + 1, t, b, tc);
     }
 
     if (ownInside) {
