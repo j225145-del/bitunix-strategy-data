@@ -1,11 +1,13 @@
 {
   "schemaVersion": 1,
-  "strategyBaseline": "N_Structure_v0_14_2_FIX1",
+  "strategyBaseline": "N_Structure_v0_14_2_FIX2_NO_SAME_BAR",
   "algorithmNotes": {
     "minRawBarsPerN": 3,
     "bos": "既有N → N內部破壞 → 不多不空 → 同方向重建 → 突破原N延伸端/弱端 → BOS → 更大同向N",
     "fvg": "bull: low > high[2]; bear: high < low[2]",
     "zoneFreshness": "FVG完整回補後保留結構背景，但退出新鮮交易候選",
+    "doubleBreakConfirmed": "老師已確認：推下一根；一個N至少3根原始K；不要在同一根K上建立反向兩端點",
+    "doubleBreakImplementation": "FIX2：雙破K不在同一根建立反向端點；若事件前已有延伸方向，當根只允許既有段端點更新，並以該K完整高低作後續參考；後續已收盤K再確認延伸或反轉。順向保留屬目前實作延續，仍需後續人工/A-B驗證，不視為老師已確認完整規則",
     "notImplemented": [
       "左側流動性演算法",
       "次級升主要規則",
@@ -27,7 +29,7 @@
     ],
     "timezone": "Asia/Taipei"
   },
-  "generatedAt": "2026-09-23T21:45:01.632Z",
+  "generatedAt": "2026-09-24T03:04:05.576Z",
   "targetDate": "2026-09-23",
   "warmupDays": 2,
   "dataQuality": {
@@ -189,26 +191,26 @@
         },
         "metrics": {
           "n": {
-            "total": 159,
-            "bullish": 68,
-            "bearish": 91
+            "total": 115,
+            "bullish": 44,
+            "bearish": 71
           },
           "neutralEntries": {
-            "total": 50,
-            "fromBull": 24,
-            "fromBear": 26
+            "total": 34,
+            "fromBull": 15,
+            "fromBear": 19
           },
           "strongBreaks": {
-            "total": 77,
-            "fromBull": 39,
-            "fromBear": 38
+            "total": 56,
+            "fromBull": 29,
+            "fromBear": 27
           },
           "bos": {
-            "total": 22,
-            "bullish": 11,
-            "bearish": 11,
-            "withZone": 13,
-            "withoutZone": 9
+            "total": 19,
+            "bullish": 9,
+            "bearish": 10,
+            "withZone": 16,
+            "withoutZone": 3
           },
           "fvg": {
             "total": 465,
@@ -216,18 +218,18 @@
             "bearish": 247
           },
           "zones": {
-            "created": 13,
-            "bullish": 7,
-            "bearish": 6,
-            "filledDuringTargetDay": 12,
-            "failedDuringTargetDay": 14,
+            "created": 16,
+            "bullish": 8,
+            "bearish": 8,
+            "filledDuringTargetDay": 13,
+            "failedDuringTargetDay": 15,
             "rejectedImmediately": 0,
-            "freshAtEnd": 2
+            "freshAtEnd": 4
           }
         },
         "freshZones": [
           {
-            "id": 43,
+            "id": 40,
             "dir": "short",
             "top": 84378.7,
             "bot": 84318.8,
@@ -239,7 +241,31 @@
             "distanceFromTargetClose": 353.1000000000058
           },
           {
-            "id": 37,
+            "id": 33,
+            "dir": "short",
+            "top": 86383.5,
+            "bot": 86318.5,
+            "fvgTop": 86318.5,
+            "fvgBottom": 86299.9,
+            "born": 1790148840000,
+            "bosTime": 1790148840000,
+            "touched": null,
+            "distanceFromTargetClose": 2352.800000000003
+          },
+          {
+            "id": 31,
+            "dir": "short",
+            "top": 86783.3,
+            "bot": 86700,
+            "fvgTop": 86700,
+            "fvgBottom": 86693.8,
+            "born": 1790142600000,
+            "bosTime": 1790142600000,
+            "touched": null,
+            "distanceFromTargetClose": 2734.300000000003
+          },
+          {
+            "id": 30,
             "dir": "short",
             "top": 86924.9,
             "bot": 86888,
@@ -260,24 +286,24 @@
         "targetBars": 288,
         "lastTargetClose": 83965.7,
         "endState": {
-          "code": -1,
-          "text": "空N有效"
+          "code": 0,
+          "text": "尚未確認方向N／強結構已失效"
         },
         "metrics": {
           "n": {
-            "total": 27,
-            "bullish": 16,
+            "total": 25,
+            "bullish": 14,
             "bearish": 11
           },
           "neutralEntries": {
-            "total": 5,
-            "fromBull": 4,
+            "total": 4,
+            "fromBull": 3,
             "fromBear": 1
           },
           "strongBreaks": {
-            "total": 13,
-            "fromBull": 10,
-            "fromBear": 3
+            "total": 11,
+            "fromBull": 9,
+            "fromBear": 2
           },
           "bos": {
             "total": 3,
@@ -296,14 +322,14 @@
             "bullish": 2,
             "bearish": 1,
             "filledDuringTargetDay": 2,
-            "failedDuringTargetDay": 5,
+            "failedDuringTargetDay": 2,
             "rejectedImmediately": 0,
             "freshAtEnd": 2
           }
         },
         "freshZones": [
           {
-            "id": 13,
+            "id": 11,
             "dir": "short",
             "top": 85901.9,
             "bot": 85663,
@@ -346,8 +372,8 @@
             "bearish": 4
           },
           "neutralEntries": {
-            "total": 4,
-            "fromBull": 3,
+            "total": 3,
+            "fromBull": 2,
             "fromBear": 1
           },
           "strongBreaks": {
@@ -371,26 +397,13 @@
             "created": 2,
             "bullish": 1,
             "bearish": 1,
-            "filledDuringTargetDay": 3,
-            "failedDuringTargetDay": 2,
+            "filledDuringTargetDay": 2,
+            "failedDuringTargetDay": 1,
             "rejectedImmediately": 0,
-            "freshAtEnd": 1
+            "freshAtEnd": 0
           }
         },
-        "freshZones": [
-          {
-            "id": 1,
-            "dir": "long",
-            "top": 81586.6,
-            "bot": 81356,
-            "fvgTop": 81697.2,
-            "fvgBottom": 81586.6,
-            "born": 1789978500000,
-            "bosTime": 1789978500000,
-            "touched": null,
-            "distanceFromTargetClose": 2379.0999999999913
-          }
-        ]
+        "freshZones": []
       }
     },
     "ETHUSDT": {
@@ -407,25 +420,25 @@
         },
         "metrics": {
           "n": {
-            "total": 175,
-            "bullish": 83,
-            "bearish": 92
+            "total": 144,
+            "bullish": 70,
+            "bearish": 74
           },
           "neutralEntries": {
-            "total": 48,
-            "fromBull": 18,
-            "fromBear": 30
+            "total": 47,
+            "fromBull": 22,
+            "fromBear": 25
           },
           "strongBreaks": {
-            "total": 74,
-            "fromBull": 35,
-            "fromBear": 39
+            "total": 63,
+            "fromBull": 31,
+            "fromBear": 32
           },
           "bos": {
-            "total": 19,
-            "bullish": 4,
-            "bearish": 15,
-            "withZone": 15,
+            "total": 22,
+            "bullish": 9,
+            "bearish": 13,
+            "withZone": 18,
             "withoutZone": 4
           },
           "fvg": {
@@ -434,27 +447,27 @@
             "bearish": 234
           },
           "zones": {
-            "created": 15,
-            "bullish": 4,
+            "created": 18,
+            "bullish": 7,
             "bearish": 11,
-            "filledDuringTargetDay": 13,
-            "failedDuringTargetDay": 13,
+            "filledDuringTargetDay": 15,
+            "failedDuringTargetDay": 16,
             "rejectedImmediately": 0,
             "freshAtEnd": 3
           }
         },
         "freshZones": [
           {
-            "id": 28,
+            "id": 24,
             "dir": "short",
-            "top": 2722.69,
-            "bot": 2713.59,
-            "fvgTop": 2713.59,
-            "fvgBottom": 2711.96,
-            "born": 1790172480000,
-            "bosTime": 1790172480000,
+            "top": 2758.54,
+            "bot": 2754.41,
+            "fvgTop": 2754.41,
+            "fvgBottom": 2754.18,
+            "born": 1790146440000,
+            "bosTime": 1790146440000,
             "touched": null,
-            "distanceFromTargetClose": 58.970000000000255
+            "distanceFromTargetClose": 99.78999999999996
           },
           {
             "id": 23,
@@ -495,9 +508,9 @@
         },
         "metrics": {
           "n": {
-            "total": 28,
-            "bullish": 11,
-            "bearish": 17
+            "total": 25,
+            "bullish": 9,
+            "bearish": 16
           },
           "neutralEntries": {
             "total": 6,
@@ -505,15 +518,15 @@
             "fromBear": 4
           },
           "strongBreaks": {
-            "total": 10,
-            "fromBull": 4,
-            "fromBear": 6
+            "total": 8,
+            "fromBull": 3,
+            "fromBear": 5
           },
           "bos": {
-            "total": 5,
+            "total": 4,
             "bullish": 2,
-            "bearish": 3,
-            "withZone": 4,
+            "bearish": 2,
+            "withZone": 3,
             "withoutZone": 1
           },
           "fvg": {
@@ -522,18 +535,18 @@
             "bearish": 37
           },
           "zones": {
-            "created": 4,
+            "created": 3,
             "bullish": 2,
-            "bearish": 2,
+            "bearish": 1,
             "filledDuringTargetDay": 3,
-            "failedDuringTargetDay": 3,
+            "failedDuringTargetDay": 2,
             "rejectedImmediately": 0,
             "freshAtEnd": 1
           }
         },
         "freshZones": [
           {
-            "id": 7,
+            "id": 4,
             "dir": "short",
             "top": 2722.91,
             "bot": 2713.21,
@@ -559,9 +572,9 @@
         },
         "metrics": {
           "n": {
-            "total": 11,
+            "total": 10,
             "bullish": 2,
-            "bearish": 9
+            "bearish": 8
           },
           "neutralEntries": {
             "total": 3,
@@ -602,126 +615,30 @@
   "comparisons": {
     "BTCUSDT": {
       "1m": {
-        "avg7d": {
-          "sampleDays": 5,
-          "nTotal": 140.4,
-          "bosTotal": 17.2,
-          "fvgTotal": 500.8,
-          "zonesCreated": 14.4,
-          "zonesFilled": 14.2,
-          "zonesFailed": 13.2
-        },
-        "avg30d": {
-          "sampleDays": 5,
-          "nTotal": 140.4,
-          "bosTotal": 17.2,
-          "fvgTotal": 500.8,
-          "zonesCreated": 14.4,
-          "zonesFilled": 14.2,
-          "zonesFailed": 13.2
-        }
+        "avg7d": null,
+        "avg30d": null
       },
       "5m": {
-        "avg7d": {
-          "sampleDays": 5,
-          "nTotal": 25.6,
-          "bosTotal": 4.6,
-          "fvgTotal": 68,
-          "zonesCreated": 4,
-          "zonesFilled": 3.4,
-          "zonesFailed": 2.6
-        },
-        "avg30d": {
-          "sampleDays": 5,
-          "nTotal": 25.6,
-          "bosTotal": 4.6,
-          "fvgTotal": 68,
-          "zonesCreated": 4,
-          "zonesFilled": 3.4,
-          "zonesFailed": 2.6
-        }
+        "avg7d": null,
+        "avg30d": null
       },
       "15m": {
-        "avg7d": {
-          "sampleDays": 5,
-          "nTotal": 7.4,
-          "bosTotal": 0.8,
-          "fvgTotal": 18.8,
-          "zonesCreated": 0.8,
-          "zonesFilled": 0.4,
-          "zonesFailed": 0.2
-        },
-        "avg30d": {
-          "sampleDays": 5,
-          "nTotal": 7.4,
-          "bosTotal": 0.8,
-          "fvgTotal": 18.8,
-          "zonesCreated": 0.8,
-          "zonesFilled": 0.4,
-          "zonesFailed": 0.2
-        }
+        "avg7d": null,
+        "avg30d": null
       }
     },
     "ETHUSDT": {
       "1m": {
-        "avg7d": {
-          "sampleDays": 5,
-          "nTotal": 141.4,
-          "bosTotal": 13.4,
-          "fvgTotal": 452,
-          "zonesCreated": 12,
-          "zonesFilled": 11.8,
-          "zonesFailed": 11
-        },
-        "avg30d": {
-          "sampleDays": 5,
-          "nTotal": 141.4,
-          "bosTotal": 13.4,
-          "fvgTotal": 452,
-          "zonesCreated": 12,
-          "zonesFilled": 11.8,
-          "zonesFailed": 11
-        }
+        "avg7d": null,
+        "avg30d": null
       },
       "5m": {
-        "avg7d": {
-          "sampleDays": 5,
-          "nTotal": 22.8,
-          "bosTotal": 2.6,
-          "fvgTotal": 66.4,
-          "zonesCreated": 1.2,
-          "zonesFilled": 1,
-          "zonesFailed": 1
-        },
-        "avg30d": {
-          "sampleDays": 5,
-          "nTotal": 22.8,
-          "bosTotal": 2.6,
-          "fvgTotal": 66.4,
-          "zonesCreated": 1.2,
-          "zonesFilled": 1,
-          "zonesFailed": 1
-        }
+        "avg7d": null,
+        "avg30d": null
       },
       "15m": {
-        "avg7d": {
-          "sampleDays": 5,
-          "nTotal": 7,
-          "bosTotal": 0.4,
-          "fvgTotal": 18.6,
-          "zonesCreated": 0.4,
-          "zonesFilled": 0.4,
-          "zonesFailed": 0.4
-        },
-        "avg30d": {
-          "sampleDays": 5,
-          "nTotal": 7,
-          "bosTotal": 0.4,
-          "fvgTotal": 18.6,
-          "zonesCreated": 0.4,
-          "zonesFilled": 0.4,
-          "zonesFailed": 0.4
-        }
+        "avg7d": null,
+        "avg30d": null
       }
     }
   }
