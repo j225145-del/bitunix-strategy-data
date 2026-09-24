@@ -9,6 +9,7 @@ const MIN_BARS = 3;
 const WARMUP_DAYS = 2;
 const MAX_FRESH_ZONES = 20;
 const DAY_MS = 86_400_000;
+const STRATEGY_BASELINE = 'N_Structure_v0_14_2_FIX2_NO_SAME_BAR';
 
 function taipeiDate(offsetDays = 0) {
   const nowTaipei = Date.now() + 8 * 60 * 60 * 1000 + offsetDays * DAY_MS;
@@ -214,7 +215,11 @@ class Core {
     const down = Number.isFinite(this.rl) && l < this.rl;
     const both = up && down;
     const first = both ? this.travel : up ? 1 : down ? -1 : 0;
-    const count = both && this.travel !== 0 ? 2 : first !== 0 ? 1 : 0;
+    // FIX2: a dual-break raw K must not create opposite pivots on the same bar.
+    // If the pre-event segment direction is known, only that segment's endpoint may update here.
+    // The full high/low of this bar becomes the next reference range; later CLOSED bars decide
+    // continuation vs reversal. If direction is unknown, defer without assigning a pivot.
+    const count = first !== 0 ? 1 : 0;
     const ownInside = this.hasN && !this.broken && l >= Math.min(this.strong, this.weak) && h <= Math.max(this.strong, this.weak);
     const wf = count > 0 ? first : this.travel;
 
@@ -240,7 +245,8 @@ class Core {
         this.point(this.pull, this.pullT, this.pullB, this.pullK, -tip.kind, tc);
         this.pull = NaN;
       }
-      for (let j = 0; j <= 1; j++) {
+      const steps = both ? 1 : 2;
+      for (let j = 0; j < steps; j++) {
         const kind = j === 0 ? first : -first;
         const p = kind === 1 ? h : l;
         this.watch(p, b * 2 + j, t, b, tc);
@@ -254,7 +260,7 @@ class Core {
       }
     }
 
-    if (!inside && count > 0) this.travel = count === 2 ? -first : first;
+    if (!inside && count > 0) this.travel = first;
     if (!Number.isFinite(this.rh) || !inside) {
       this.rh = h; this.rl = l; this.rt = t; this.rb = b;
     }
@@ -449,8 +455,9 @@ function loadHistory(targetDate, days) {
   return rows;
 }
 
-function rollingAverages(history, symbol, interval) {
+function rollingAverages(history, symbol, interval, strategyBaseline) {
   const vals = history
+    .filter(d => d?.strategyBaseline === strategyBaseline)
     .map(d => d?.results?.[symbol]?.[interval]?.metrics)
     .filter(Boolean);
   if (!vals.length) return null;
@@ -510,20 +517,22 @@ async function main() {
     comparisons[symbol] = {};
     for (const interval of INTERVALS) {
       comparisons[symbol][interval] = {
-        avg7d: rollingAverages(history7, symbol, interval),
-        avg30d: rollingAverages(history30, symbol, interval),
+        avg7d: rollingAverages(history7, symbol, interval, STRATEGY_BASELINE),
+        avg30d: rollingAverages(history30, symbol, interval, STRATEGY_BASELINE),
       };
     }
   }
 
   const output = {
     schemaVersion: 1,
-    strategyBaseline: 'N_Structure_v0_14_2_FIX1',
+    strategyBaseline: STRATEGY_BASELINE,
     algorithmNotes: {
       minRawBarsPerN: MIN_BARS,
       bos: '既有N → N內部破壞 → 不多不空 → 同方向重建 → 突破原N延伸端/弱端 → BOS → 更大同向N',
       fvg: 'bull: low > high[2]; bear: high < low[2]',
       zoneFreshness: 'FVG完整回補後保留結構背景，但退出新鮮交易候選',
+      doubleBreakConfirmed: '老師已確認：推下一根；一個N至少3根原始K；不要在同一根K上建立反向兩端點',
+      doubleBreakImplementation: 'FIX2：雙破K不在同一根建立反向端點；若事件前已有延伸方向，當根只允許既有段端點更新，並以該K完整高低作後續參考；後續已收盤K再確認延伸或反轉。順向保留屬目前實作延續，仍需後續人工/A-B驗證，不視為老師已確認完整規則',
       notImplemented: ['左側流動性演算法', '次級升主要規則', '老師藍框的未確認邊界規則'],
     },
     source: {
